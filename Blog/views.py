@@ -8,7 +8,7 @@ class BlogListView(ListView):
     model = Post
     template_name = "../templates/blog/post/home.html"
     context_object_name = 'posts'
-    paginate_by = 10
+    paginate_by = 2
 
 
 class BlogDetailView(DetailView):
