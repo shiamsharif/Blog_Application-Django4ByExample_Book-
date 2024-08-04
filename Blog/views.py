@@ -5,7 +5,8 @@ from .models import Post
 
 # Create your views here.
 class BlogListView(ListView):
-    model = Post
+    
+    queryset = Post.published.all()
     template_name = "../templates/blog/post/home.html"
     context_object_name = 'posts'
     paginate_by = 2
@@ -14,6 +15,7 @@ class BlogListView(ListView):
 class BlogDetailView(DetailView):
     model = Post
     template_name="../templates/blog/post/detail.html"
+
 
 class UserPostListView(ListView):
     model = Post
