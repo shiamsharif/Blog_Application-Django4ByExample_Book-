@@ -1,9 +1,27 @@
 {% extends "blog/base.html" %}
+
 {% block title %}{{ post.title }}{% endblock %}
+
 {% block content %}
-    <h1>{{ post.title }}</h1>
-    <p class="date">
-        Published {{ post.publish }} by {{ post.author }}
-    </p>
-    {{ post.body|linebreaks }}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card mb-4 shadow-sm">
+                <div class="card-body">
+                    <h1 class="card-title">{{ post.title }}</h1>
+                    <p class="card-text text-muted mb-4">
+                        Published on {{ post.publish|date:"F j, Y, g:i a" }} by <strong>{{ post.author }}</strong>
+                    </p>
+                    <hr>
+                    <div class="post-body">
+                        {{ post.body|linebreaks }}
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-4">
+                <a href="{% url 'home' %}" class="btn btn-primary">Back to Posts</a>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

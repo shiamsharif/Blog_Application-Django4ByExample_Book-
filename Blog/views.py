@@ -11,7 +11,7 @@ class BlogListView(ListView):
     queryset = Post.published.all()
     template_name = "../templates/blog/post/home.html"
     context_object_name = 'posts'
-    paginate_by = 2
+    paginate_by = 3
     
 # def post_share(request, post_id):
 #     post = get_object_or_404(Post, id=post_id, ststus=Post.Status.PUBLISHED)
