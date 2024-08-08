@@ -10,7 +10,11 @@
                 <div class="card-body">
                     <h1 class="card-title">{{ post.title }}</h1>
                     <p class="card-text text-muted mb-4">
-                        Published on {{ post.publish|date:"F j, Y, g:i a" }} by <strong>{{ post.author }}</strong>
+                        <small>
+                            <i class="bi bi-calendar-event"></i> Published on 
+                            <span class="fw-semibold">{{ post.publish|date:"F j, Y, g:i a" }}</span> by 
+                            <a href="{% url 'user_posts' post.author %}" class="text-primary fw-bold">{{ post.author }}</a>
+                        </small>
                     </p>
                     <hr>
                     <div class="post-body">
