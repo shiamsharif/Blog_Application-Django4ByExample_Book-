@@ -10,18 +10,24 @@ class BlogListView(ListView):
     
     queryset = Post.published.all()
     template_name = "../templates/blog/post/home.html"
-    context_object_name = 'posts'
     paginate_by = 3
     
-# def post_share(request, post_id):
-#     post = get_object_or_404(Post, id=post_id, ststus=Post.Status.PUBLISHED)
-#     if request.method == 'POST':
-#         form = EmailPostForm(request.POST)
-#         if form.is_valid():
-#             cd = form.cleaned_data
-#     else:
-#         form = EmailPostForm()
-#     request render
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        posts = Post.objects.all()
+        context["posts"] = posts
+        
+        # Create a dictionary to store comments for each post
+        post_comments = {}
+        
+        for post in posts:
+            # Filter comments related to the current post
+            comments = Comment.objects.filter(post=post)
+            post_comments[post] = comments
+        
+        context["post_comments"] = post_comments
+        return context
+
 
 @require_POST
 def post_comment(request, post_id):
@@ -36,6 +42,7 @@ def post_comment(request, post_id):
                   {'post': post,
                    'form': form,
                    'comment': comment})
+
 
 class BlogDetailView(DetailView):
     model = Post
